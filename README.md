@@ -1,6 +1,4 @@
-## name of project
-### Code Badges
-### Directives Demos
+### Directives Demo
 
 ### Contributors
 - [David Boling](https://github.com/kadowki)
