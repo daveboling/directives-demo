@@ -3,7 +3,7 @@
 
    var hello = angular.module('dbClockModule', []);
 
-   hello.directive('dbClock', [function(){
+   hello.directive('dbClock', ['$interval', function($interval){
      var o = {};
 
     //E = element, A = attribute, C = class
@@ -19,7 +19,26 @@
     //{} = isolate scope
     //o.scope = false, true, {}
     //The @ sign represents a attribute method parameter to be defined within the element itself
-    o.scope = {};
+    o.scope = {frequency: '@'};
+
+    //link function - allows to manipulate or change the DOM in real time
+    //scope, see the isolate scope
+    //element is the top level element in the widget
+    //attrs, what are the attribute that are part of this directive
+    o.link = function(scope, element, attrs){
+      function updateTime(){
+        scope.date = new Date();
+      }
+
+      var id = $interval(updateTime, scope.frequency * 1);
+
+      //whenever another page is select in Angular, it sends a $destory broadcast, when it does
+      //this event will get fired. It will also destroy the interval currently running.
+      element.on('$destroy', function(){
+        $interval.cancel(id);
+      });
+
+    };
 
     return o;
   }]);
