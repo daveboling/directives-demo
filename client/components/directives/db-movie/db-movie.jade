@@ -1,5 +1,6 @@
 div.pane
   h1 {{result.title}}
   h3 Release Date: {{result.release_dates.theater}}
-  .poster(style='background-image: url("{{image}}")')
+  .poster(style='background-image: url("{{result.posters.original}}")')
   div.synopsis {{result.synopsis}}
+  button(ng-click='remove()') X

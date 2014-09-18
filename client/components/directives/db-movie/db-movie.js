@@ -25,17 +25,19 @@
 
     o.templateUrl = '/components/directives/db-movie/db-movie.html';
 
-    o.scope = {movie:'@'};
+    //functions get an ampersand
+    //Our handler for this function is given inside controller calling this
+    o.scope = {movie:'@', remove:'&'};
 
     o.link = function(scope, element, attrs){
     };
 
-    o.controller = ['$scope', 'MovieApi', function($scope, MovieApi){
+    o.controller = ['$scope', 'MovieApi',function($scope, MovieApi, Movie){
       MovieApi.search($scope.movie)
      .then(MovieApi.info)
      .then(function(res){
        $scope.result = res.data;
-       $scope.image = res.data.posters.original.replace('_tmb', '_pos');
+       $scope.result.posters.original = res.data.posters.original.replace('_tmb', '_pos');
       });
     }];
 

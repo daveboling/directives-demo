@@ -1,4 +1,7 @@
 h2 Dave's Movie Directive
-
-div(db-movie movie='The Hobbit')
-div(db-movie movie='Guardians of the Galaxy')
+input(type='text' ng-model='movie')
+button.btn.btn-primary(type='button' ng-click='addMovie()') Search
+div(db-movie, ng-repeat='t in titles', movie='{{t}}' remove='delMovie($index, t._id)')
+div(db-weather, zip='37075')
+div(db-weather)
+div(db-locate)
